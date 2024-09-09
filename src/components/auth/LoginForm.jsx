@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import Field from "../common/Field";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+    const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -10,6 +12,7 @@ function LoginForm() {
 
   const submitForm = (formData) => {
     console.log(formData);
+    navigate("/"); // Redirect to home page
   };
 
   return (
