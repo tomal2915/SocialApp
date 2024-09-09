@@ -9,7 +9,9 @@ const getChildId = (children) => {
 };
 
 function Field({ lebel, children, htmlFor, error }) {
+
   const id = htmlFor || getChildId(children);
+  
   return (
     <div className="form-control">
       {lebel && (

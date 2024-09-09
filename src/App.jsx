@@ -4,13 +4,17 @@ import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import PrivetRoutes from "./routes/PrivetRoutes";
 function App() {
   return (
     <>
       <Routes>
-        <Route element={<HomePage />} path="/" exact />
+        <Route element={<PrivetRoutes />}>
+          <Route element={<HomePage />} path="/" exact />
+          <Route element={<ProfilePage />} path="/myProfile" />
+        </Route>
+
         <Route element={<LoginPage />} path="/login" />
-        <Route element={<ProfilePage />} path="/myProfile" />
         <Route element={<RegisterPage />} path="/register" />
 
         <Route element={<NotFoundPage />} path="*" />

@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import Field from "../common/Field";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 function LoginForm() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -12,6 +15,8 @@ function LoginForm() {
 
   const submitForm = (formData) => {
     console.log(formData);
+    const user = {...formData}; // Mock user data
+    setAuth({ user}); // Set user in context
     navigate("/"); // Redirect to home page
   };
 
@@ -20,7 +25,7 @@ function LoginForm() {
       className="border-b border-[#3F3F3F] pb-10 lg:pb-[60px]"
       onSubmit={handleSubmit(submitForm)}
     >
-      <Field lebel="Email"error={errors.email}>
+      <Field lebel="Email" error={errors.email}>
         <input
           {...register("email", { required: "Email is required" })}
           className={`auth-input ${
