@@ -16,7 +16,6 @@ function App() {
 
         <Route element={<LoginPage />} path="/login" />
         <Route element={<RegisterPage />} path="/register" />
-
         <Route element={<NotFoundPage />} path="*" />
       </Routes>
     </>
