@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form";
 import Field from "../common/Field";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import axios from "axios";
+
+const baseURL = import.meta.env.VITE_SERVER_BASE_URL;
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -11,13 +14,34 @@ function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
 
-  const submitForm = (formData) => {
-    console.log(formData);
-    const user = {...formData}; // Mock user data
-    setAuth({ user}); // Set user in context
-    navigate("/"); // Redirect to home page
+  const submitForm = async (formData) => {
+    try {
+      const response = await axios.post(`${baseURL}/auth/login`, formData);
+
+      if (response.status === 200) {
+        const { user, token } = response.data;
+        if (token) {
+          const authToken = token.token;
+          const refreshToken = token.refreshToken;
+
+          console.log(`login time token: ${authToken}`);
+
+          setAuth({ user, authToken, refreshToken }); // Set user in context
+
+          navigate("/"); // Redirect to home page
+        }
+      }
+    } catch (error) {
+      console.error(error);
+
+      setError("root.random", {
+        type: "random",
+        message: `Something went wrong. Please try again later. ${formData?.email} not found`,
+      });
+    }
   };
 
   return (
@@ -53,6 +77,7 @@ function LoginForm() {
           id="password"
         />
       </Field>
+      <p>{errors?.root?.random?.message}</p>
       <Field>
         <button
           className="auth-input bg-lwsGreen font-bold text-deepDark transition-all hover:opacity-90"
