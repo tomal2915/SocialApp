@@ -26,26 +26,26 @@ const useAxios = () => {
 
     // add a response interceptor
     const responseInterceptor = api.interceptors.response.use(
-      (response) => {
-        response;
-      },
+      (response) => response, // do not use brackets here
       async (error) => {
         // Do something with response error
         const originalRequest = error.config;
+
         if (error.response.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
           // Refresh token
           try {
             const refreshToken = auth?.refreshToken;
-            await axios.post(
+            const response = await axios.post(
               `${import.meta.env.VITE_SERVER_BASE_URL}/auth/refresh-token`,
               { refreshToken }
             );
 
             const { token } = response.data;
 
-            console.log(`new token: ${token}`);
+            console.log(`new refresh token: ${token}`);
+
             setAuth({ ...auth, authToken: token });
 
             originalRequest.headers.Authorization = `Bearer ${token}`;

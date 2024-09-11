@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   const { auth } = useAuth();
-  console.log(auth);
 
   return (
     <div>

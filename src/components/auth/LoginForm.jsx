@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_SERVER_BASE_URL;
+const URL = import.meta.env.VITE_SERVER_BASE_URL;
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function LoginForm() {
 
   const submitForm = async (formData) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/login`, formData);
+      const response = await axios.post(`${URL}/auth/login`, formData);
 
       if (response.status === 200) {
         const { user, token } = response.data;
