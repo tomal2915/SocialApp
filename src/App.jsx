@@ -5,6 +5,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import PrivetRoutes from "./routes/PrivetRoutes";
+
 function App() {
   return (
     <>
