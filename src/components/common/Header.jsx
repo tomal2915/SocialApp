@@ -5,9 +5,11 @@ import notification from "../../assets/icons/notification.svg";
 import avatar from "../../assets/images/avatars/avatar_1.png";
 import LogOut from "../auth/LogOut";
 import { useAuth } from "../../hooks/useAuth";
+import { useProfile } from "../../hooks/useProfile";
 
 function Header() {
   const { auth } = useAuth();
+  const { state } = useProfile();
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">

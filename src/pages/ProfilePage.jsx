@@ -43,7 +43,7 @@ function ProfilePage() {
 
   return (
     <>
-      <div>{state?.user?.firstName}</div>
+      <div>{state?.user?.firstName}{" "}{state?.user?.lastName}</div>
       <p>{state?.posts.length}</p>
     </>
     // <main className="mx-auto max-w-[1020px] py-8">

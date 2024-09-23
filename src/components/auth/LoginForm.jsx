@@ -27,7 +27,7 @@ function LoginForm() {
           const authToken = token.token;
           const refreshToken = token.refreshToken;
 
-          console.log(`login time token: ${authToken}`);
+          // console.log(`login time token: ${authToken}`);
 
           setAuth({ user, authToken, refreshToken }); // Set user in context
 
@@ -35,7 +35,7 @@ function LoginForm() {
         }
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
 
       setError("root.random", {
         type: "random",
